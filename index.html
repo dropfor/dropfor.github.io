@@ -354,7 +354,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 12px 16px;
             background: rgba(255, 255, 255, 0.1);
@@ -366,9 +367,19 @@
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1a1a1a;
+            color: #ffffff;
         }
 
         .form-group textarea {
@@ -513,7 +524,7 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Стартовый</h3>
-                    <div class="price">15000 <span>₽</span></div>
+                    <div class="price">7 000 <span>₽</span></div>
                     <ul>
                         <li>Каталог товаров</li>
                         <li>Приём заявок</li>
@@ -521,11 +532,11 @@
                         <li>Техподдержка 1 месяц</li>
                         <li>Готовое решение за 1 день</li>
                     </ul>
-                    <a href="#contact" class="pricing-button">Выбрать</a>
+                    <a href="#contact" class="pricing-button" data-plan="starter">Выбрать</a>
                 </div>
                 <div class="pricing-card featured">
                     <h3>Бизнес</h3>
-                    <div class="price">50 000 <span>₽</span></div>
+                    <div class="price">12 000 <span>₽</span></div>
                     <ul>
                         <li>Онлайн-оплата</li>
                         <li>База клиентов</li>
@@ -533,11 +544,11 @@
                         <li>Интеграция с CRM</li>
                         <li>Техподдержка 3 месяца</li>
                     </ul>
-                    <a href="#contact" class="pricing-button">Выбрать</a>
+                    <a href="#contact" class="pricing-button" data-plan="business">Выбрать</a>
                 </div>
                 <div class="pricing-card">
                     <h3>Индивидуальный</h3>
-                    <div class="price">80000 <span>₽</span></div>
+                    <div class="price">20 000 <span>₽</span></div>
                     <ul>
                         <li>Полная кастомизация</li>
                         <li>Сложная логика</li>
@@ -545,7 +556,7 @@
                         <li>Многоязычность</li>
                         <li>Техподдержка 6 месяцев</li>
                     </ul>
-                    <a href="#contact" class="pricing-button">Выбрать</a>
+                    <a href="#contact" class="pricing-button" data-plan="individual">Выбрать</a>
                 </div>
             </div>
         </div>
@@ -555,6 +566,15 @@
         <div class="container">
             <h2 class="section-title">Свяжитесь с нами</h2>
             <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="plan">Тарифный план</label>
+                    <select id="plan" name="plan" required>
+                        <option value="">Выберите тарифный план</option>
+                        <option value="starter">Стартовый - 7 000 ₽</option>
+                        <option value="business">Бизнес - 12 000 ₽</option>
+                        <option value="individual">Индивидуальный - 20 000 ₽</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="name">Ваше имя</label>
                     <input type="text" id="name" name="name" required>
@@ -594,6 +614,20 @@
                         block: 'start'
                     });
                 }
+                
+                // Set selected plan if it's a pricing button
+                if (this.classList.contains('pricing-button')) {
+                    const planType = this.getAttribute('data-plan');
+                    const planSelect = document.getElementById('plan');
+                    if (planSelect && planType) {
+                        planSelect.value = planType;
+                        // Add visual feedback
+                        planSelect.style.borderColor = '#667eea';
+                        setTimeout(() => {
+                            planSelect.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                        }, 2000);
+                    }
+                }
             });
         });
 
@@ -606,13 +640,22 @@
             const data = Object.fromEntries(formData);
             
             // Simple validation
-            if (!data.name || !data.email || !data.phone) {
+            if (!data.name || !data.email || !data.phone || !data.plan) {
                 alert('Пожалуйста, заполните все обязательные поля');
                 return;
             }
             
-            // Simulate form submission
-            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            // Get plan name for display
+            const planNames = {
+                'starter': 'Стартовый - 7 000 ₽',
+                'business': 'Бизнес - 12 000 ₽',
+                'individual': 'Индивидуальный - 20 000 ₽'
+            };
+            
+            const selectedPlan = planNames[data.plan] || data.plan;
+            
+            // Simulate form submission with plan info
+            alert(`Спасибо за заявку!\n\nВыбранный тариф: ${selectedPlan}\n\nМы свяжемся с вами в ближайшее время для обсуждения деталей.`);
             this.reset();
         });
 
