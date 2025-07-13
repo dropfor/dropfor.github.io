@@ -2,11 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Telegram-боты под ключ</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white text-gray-900 font-sans">
+
   <!-- Хедер -->
   <header class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-6 px-4 text-center">
     <h1 class="text-3xl font-bold">Telegram-боты под ключ</h1>
@@ -68,8 +69,8 @@
   <section class="py-12 px-4 max-w-2xl mx-auto" id="form">
     <h2 class="text-2xl font-semibold text-center mb-6">Оставьте заявку</h2>
     <form class="bg-white p-6 rounded-xl shadow space-y-4" id="tg-form">
-      <input type="text" placeholder="Ваше имя" class="w-full p-3 border rounded" required>
-      <input type="tel" placeholder="Телефон или Telegram" class="w-full p-3 border rounded" required>
+      <input type="text" placeholder="Ваше имя" class="w-full p-3 border rounded" required />
+      <input type="tel" placeholder="Телефон или Telegram" class="w-full p-3 border rounded" required />
       <textarea placeholder="Тип бизнеса или задача" class="w-full p-3 border rounded h-32" required></textarea>
       <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded hover:bg-indigo-700">Получить консультацию</button>
     </form>
@@ -80,12 +81,10 @@
     © 2025 Telegram-боты под ключ. Все права защищены.
   </footer>
 
-  <!-- Интеграция с Trello -->
+  <!-- Скрипт интеграции с Trello -->
   <script>
     document.querySelector("#tg-form").addEventListener("submit", async function (e) {
       e.preventDefault();
-
-      alert("Отправка началась..."); // Проверка, срабатывает ли обработчик формы
 
       const name = this.querySelector('input[placeholder="Ваше имя"]').value;
       const contact = this.querySelector('input[placeholder="Телефон или Telegram"]').value;
@@ -94,32 +93,27 @@
       const cardName = `Заявка от ${name}`;
       const cardDesc = `Контакт: ${contact}\nЗадача: ${message}`;
 
-      const key = 'f8784da12eb9d6bf78108972d96a3444';
-      const token = '55c4ca3575fa0b73749a1c0cd4b5365b7bda3d70bd0f360234b7977f4e803694';
+      const key = 'fec9bd8ef05e610658deb21f93cf612e';
+      const token = '9ce92a0efccfcbf913405a625ae495a469907831dc5c90c3e27df95733f10c90';
       const listId = '68737ca2e73d2aabf549d930';
 
       const url = `https://api.trello.com/1/cards?key=${key}&token=${token}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDesc)}`;
 
-      console.log("📤 Отправка запроса в Trello:", url);
-
       try {
-        const response = await fetch(url, {
-          method: 'POST'
-        });
+        const response = await fetch(url, { method: 'POST' });
 
         if (response.ok) {
-          alert("✅ Заявка успешно отправлена в Trello!");
+          alert("Заявка успешно отправлена в Trello!");
           this.reset();
         } else {
           const errorText = await response.text();
-          alert("❌ Ошибка при отправке в Trello: " + errorText);
-          console.error("Ошибка:", errorText);
+          alert("Ошибка при отправке в Trello: " + errorText);
         }
-      } catch (err) {
-        alert("⛔ Сетевая ошибка: " + err.message);
-        console.error("Сетевая ошибка:", err);
+      } catch (error) {
+        alert("Ошибка сети или CORS: " + error.message);
       }
     });
   </script>
+
 </body>
 </html>
