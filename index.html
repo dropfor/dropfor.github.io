@@ -103,11 +103,12 @@
       });
 
       if (response.ok) {
-        alert("Заявка успешно отправлена в Trello!");
-        this.reset();
-      } else {
-        alert("Ошибка при отправке в Trello.");
-      }
+  alert("Заявка успешно отправлена в Trello!");
+  this.reset();
+} else {
+  const errorText = await response.text();
+  alert("Ошибка при отправке в Trello: " + errorText);
+}
     });
   </script>
 </body>
