@@ -85,6 +85,8 @@
     document.querySelector("#tg-form").addEventListener("submit", async function (e) {
       e.preventDefault();
 
+      alert("Отправка началась..."); // Проверка, срабатывает ли обработчик формы
+
       const name = this.querySelector('input[placeholder="Ваше имя"]').value;
       const contact = this.querySelector('input[placeholder="Телефон или Telegram"]').value;
       const message = this.querySelector('textarea').value;
@@ -98,17 +100,25 @@
 
       const url = `https://api.trello.com/1/cards?key=${key}&token=${token}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDesc)}`;
 
-      const response = await fetch(url, {
-        method: 'POST'
-      });
+      console.log("📤 Отправка запроса в Trello:", url);
 
-      if (response.ok) {
-  alert("Заявка успешно отправлена в Trello!");
-  this.reset();
-} else {
-  const errorText = await response.text();
-  alert("Ошибка при отправке в Trello: " + errorText);
-}
+      try {
+        const response = await fetch(url, {
+          method: 'POST'
+        });
+
+        if (response.ok) {
+          alert("✅ Заявка успешно отправлена в Trello!");
+          this.reset();
+        } else {
+          const errorText = await response.text();
+          alert("❌ Ошибка при отправке в Trello: " + errorText);
+          console.error("Ошибка:", errorText);
+        }
+      } catch (err) {
+        alert("⛔ Сетевая ошибка: " + err.message);
+        console.error("Сетевая ошибка:", err);
+      }
     });
   </script>
 </body>
