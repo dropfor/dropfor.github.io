@@ -397,11 +397,38 @@
             font-weight: 600;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .submit-button:hover {
             transform: translateY(-2px);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .form-status.success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .form-status.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
         /* Footer */
@@ -565,7 +592,7 @@
     <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title">Свяжитесь с нами</h2>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xanbwevq" method="POST">
                 <div class="form-group">
                     <label for="plan">Тарифный план</label>
                     <select id="plan" name="plan" required>
@@ -591,7 +618,8 @@
                     <label for="message">Описание задачи</label>
                     <textarea id="message" name="message" placeholder="Расскажите о вашем проекте..."></textarea>
                 </div>
-                <button type="submit" class="submit-button">Отправить заявку</button>
+                <button type="submit" class="submit-button" id="submitButton">Отправить заявку</button>
+                <div class="form-status" id="formStatus"></div>
             </form>
         </div>
     </section>
@@ -632,8 +660,11 @@
         });
 
         // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            const submitButton = document.getElementById('submitButton');
+            const formStatus = document.getElementById('formStatus');
             
             // Get form data
             const formData = new FormData(this);
@@ -641,7 +672,7 @@
             
             // Simple validation
             if (!data.name || !data.email || !data.phone || !data.plan) {
-                alert('Пожалуйста, заполните все обязательные поля');
+                showFormStatus('Пожалуйста, заполните все обязательные поля', 'error');
                 return;
             }
             
@@ -654,10 +685,59 @@
             
             const selectedPlan = planNames[data.plan] || data.plan;
             
-            // Simulate form submission with plan info
-            alert(`Спасибо за заявку!\n\nВыбранный тариф: ${selectedPlan}\n\nМы свяжемся с вами в ближайшее время для обсуждения деталей.`);
-            this.reset();
+            // Add selected plan info to form data
+            formData.append('selected_plan_display', selectedPlan);
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Отправляем...';
+            formStatus.style.display = 'none';
+            
+            try {
+                // Submit to Formspree
+                const response = await fetch('https://formspree.io/f/xanbwevq', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showFormStatus(`Спасибо за заявку!\n\nВыбранный тариф: ${selectedPlan}\n\nМы свяжемся с вами в ближайшее время для обсуждения деталей.`, 'success');
+                    this.reset();
+                } else {
+                    const errorData = await response.json();
+                    if (errorData.errors) {
+                        showFormStatus('Ошибка при отправке: ' + errorData.errors.map(e => e.message).join(', '), 'error');
+                    } else {
+                        showFormStatus('Произошла ошибка при отправке формы. Попробуйте еще раз.', 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showFormStatus('Произошла ошибка при отправке формы. Проверьте интернет-соединение и попробуйте еще раз.', 'error');
+            } finally {
+                // Restore button state
+                submitButton.disabled = false;
+                submitButton.textContent = 'Отправить заявку';
+            }
         });
+        
+        // Function to show form status messages
+        function showFormStatus(message, type) {
+            const formStatus = document.getElementById('formStatus');
+            formStatus.textContent = message;
+            formStatus.className = `form-status ${type}`;
+            formStatus.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+            }
+        }
 
         // Add some interactive effects
         const cards = document.querySelectorAll('.feature-card, .pricing-card');
