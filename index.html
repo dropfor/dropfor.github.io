@@ -1,119 +1,260 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Telegram-боты под ключ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram-боты под ключ | Разработка и автоматизация</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .success-message { display: none; }
+    .form-container.success .form-fields { display: none; }
+    .form-container.success .success-message { display: block; }
+    .feature-card:hover { transform: translateY(-5px); }
+  </style>
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body class="bg-gray-50 font-sans">
 
-  <!-- Хедер -->
-  <header class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-6 px-4 text-center">
-    <h1 class="text-3xl font-bold">Telegram-боты под ключ</h1>
-    <p class="mt-2 text-lg">Автоматизируйте продажи и общение с клиентами</p>
-    <a href="#form" class="mt-4 inline-block bg-white text-indigo-600 font-semibold py-2 px-6 rounded-full shadow hover:bg-gray-100 transition">Получить консультацию</a>
+  <!-- Шапка -->
+  <header class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 px-4 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4">Профессиональные Telegram-боты</h1>
+      <p class="text-xl mb-8">Автоматизируем ваш бизнес с помощью умных ботов под ключ</p>
+      <a href="#form" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
+        Заказать бота
+      </a>
+    </div>
   </header>
 
   <!-- Преимущества -->
-  <section class="py-12 px-4 max-w-5xl mx-auto">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Почему выбирают нас</h2>
-    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-      <div class="bg-gray-50 p-6 rounded-xl shadow">
-        <p class="text-lg font-medium">✅ Бот работает 24/7</p>
+  <section class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12">Почему наши боты эффективны</h2>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+        <div class="text-indigo-600 text-4xl mb-4">🤖</div>
+        <h3 class="text-xl font-semibold mb-3">Круглосуточная работа</h3>
+        <p class="text-gray-600">Ваш бот отвечает клиентам 24/7 без выходных и перерывов</p>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow">
-        <p class="text-lg font-medium">💬 Удобен для клиентов</p>
+      <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+        <div class="text-indigo-600 text-4xl mb-4">💰</div>
+        <h3 class="text-xl font-semibold mb-3">Увеличение продаж</h3>
+        <p class="text-gray-600">Автоматизируем процесс продаж и сокращаем потери клиентов</p>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow">
-        <p class="text-lg font-medium">⚙️ Автоматизация задач</p>
-      </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow">
-        <p class="text-lg font-medium">📈 Увеличивает продажи</p>
-      </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow">
-        <p class="text-lg font-medium">💸 Экономит расходы</p>
-      </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow">
-        <p class="text-lg font-medium">🚀 Быстрый запуск — от 1 дня</p>
+      <div class="feature-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+        <div class="text-indigo-600 text-4xl mb-4">⚡</div>
+        <h3 class="text-xl font-semibold mb-3">Быстрый запуск</h3>
+        <p class="text-gray-600">Готовые решения от 1 дня, индивидуальная разработка за 3-5 дней</p>
       </div>
     </div>
   </section>
 
   <!-- Тарифы -->
-  <section class="bg-gray-100 py-12 px-4" id="pricing">
-    <h2 class="text-2xl font-semibold text-center mb-8">Готовые решения</h2>
-    <div class="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-      <div class="bg-white p-6 rounded-xl shadow">
-        <h3 class="text-xl font-bold mb-2">📦 Простой бот</h3>
-        <p class="mb-4">Каталог, оформление заказа, поддержка</p>
-        <p class="text-2xl font-semibold mb-4">от 7 000 ₽</p>
-        <a href="#form" class="inline-block bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Подключить</a>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow border-2 border-indigo-600">
-        <h3 class="text-xl font-bold mb-2">🔧 Бот с оплатой</h3>
-        <p class="mb-4">Меню, онлайн-оплата, напоминания</p>
-        <p class="text-2xl font-semibold mb-4">от 12 000 ₽</p>
-        <a href="#form" class="inline-block bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Подключить</a>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow">
-        <h3 class="text-xl font-bold mb-2">🛠 Индивидуальный бот</h3>
-        <p class="mb-4">Интеграции, CRM, уникальная логика</p>
-        <p class="text-2xl font-semibold mb-4">от 20 000 ₽</p>
-        <a href="#form" class="inline-block bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Обсудить задачу</a>
+  <section class="bg-gray-100 py-16 px-4" id="pricing">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">Наши тарифы</h2>
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-bold mb-4">Базовый</h3>
+          <p class="text-gray-600 mb-6">Каталог товаров, заявки, уведомления</p>
+          <p class="text-3xl font-bold mb-6">от 7 000 ₽</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> До 10 товаров</li>
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Форма заявки</li>
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Уведомления</li>
+          </ul>
+          <a href="#form" class="block w-full bg-indigo-600 text-white text-center py-3 px-4 rounded-lg hover:bg-indigo-700 transition">Заказать</a>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md border-2 border-indigo-600 transform scale-[1.02]">
+          <div class="bg-indigo-600 text-white text-sm font-bold py-1 px-3 rounded-full inline-block mb-3">Популярный</div>
+          <h3 class="text-2xl font-bold mb-4">Стандарт</h3>
+          <p class="text-gray-600 mb-6">Онлайн-оплата, база клиентов, аналитика</p>
+          <p class="text-3xl font-bold mb-6">от 12 000 ₽</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Онлайн-оплата</li>
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> База клиентов</li>
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Простая аналитика</li>
+          </ul>
+          <a href="#form" class="block w-full bg-indigo-600 text-white text-center py-3 px-4 rounded-lg hover:bg-indigo-700 transition">Заказать</a>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-bold mb-4">Премиум</h3>
+          <p class="text-gray-600 mb-6">Индивидуальное решение под ваш бизнес</p>
+          <p class="text-3xl font-bold mb-6">от 20 000 ₽</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Уникальный функционал</li>
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Интеграции с CRM</li>
+            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Полная автоматизация</li>
+          </ul>
+          <a href="#form" class="block w-full bg-indigo-600 text-white text-center py-3 px-4 rounded-lg hover:bg-indigo-700 transition">Обсудить проект</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Форма заявки -->
-  <section class="py-12 px-4 max-w-2xl mx-auto" id="form">
-    <h2 class="text-2xl font-semibold text-center mb-6">Оставьте заявку</h2>
-    <form class="bg-white p-6 rounded-xl shadow space-y-4" id="tg-form">
-      <input type="text" placeholder="Ваше имя" class="w-full p-3 border rounded" required />
-      <input type="tel" placeholder="Телефон или Telegram" class="w-full p-3 border rounded" required />
-      <textarea placeholder="Тип бизнеса или задача" class="w-full p-3 border rounded h-32" required></textarea>
-      <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded hover:bg-indigo-700">Получить консультацию</button>
-    </form>
+  <!-- Форма -->
+  <section class="py-16 px-4 max-w-2xl mx-auto" id="form">
+    <div class="form-container bg-white rounded-xl shadow-xl overflow-hidden">
+      <div class="form-fields p-8">
+        <h2 class="text-2xl font-bold text-center mb-6">Оставить заявку</h2>
+        <p class="text-gray-600 text-center mb-8">Заполните форму и мы свяжемся с вами для обсуждения деталей</p>
+        
+        <form 
+          id="contact-form" 
+          action="https://formsubmit.co/bzx271+hxgz1kixlcpf2pbsmo5c@boards.trello.com" 
+          method="POST"
+          class="space-y-6"
+        >
+          <!-- Конфигурация FormSubmit -->
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="Новая заявка на Telegram-бота">
+          <input type="hidden" name="_next" value="https://вашсайт.ru/thanks.html">
+          <input type="hidden" name="_template" value="table">
+          
+          <!-- Поля формы -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Ваше имя *</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="Имя" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+          </div>
+          
+          <div>
+            <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">Контактные данные *</label>
+            <input 
+              type="text" 
+              id="contact" 
+              name="Контакт" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Телефон или Telegram"
+            >
+          </div>
+          
+          <div>
+            <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Интересующий тариф</label>
+            <select 
+              id="service" 
+              name="Тариф"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+              <option value="Базовый">Базовый (от 7 000 ₽)</option>
+              <option value="Стандарт" selected>Стандарт (от 12 000 ₽)</option>
+              <option value="Премиум">Премиум (от 20 000 ₽)</option>
+              <option value="Не знаю">Не знаю, нужна консультация</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Опишите задачу *</label>
+            <textarea 
+              id="message" 
+              name="Сообщение" 
+              rows="4" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Какие функции должен выполнять бот?"
+            ></textarea>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition duration-200"
+          >
+            Отправить заявку
+          </button>
+        </form>
+      </div>
+      
+      <div class="success-message p-8 text-center">
+        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+          <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Заявка отправлена!</h3>
+        <p class="text-gray-600 mb-6">Мы свяжемся с вами в течение 1 рабочего дня</p>
+        <a 
+          href="#form" 
+          onclick="resetForm()"
+          class="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+        >
+          Отправить новую заявку
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- Футер -->
-  <footer class="bg-gray-50 text-center py-6 text-sm text-gray-500">
-    © 2025 Telegram-боты под ключ. Все права защищены.
+  <footer class="bg-gray-800 text-white py-12 px-4">
+    <div class="max-w-6xl mx-auto grid gap-8 md:grid-cols-3">
+      <div>
+        <h3 class="text-xl font-bold mb-4">Telegram-боты под ключ</h3>
+        <p class="text-gray-400">Профессиональная разработка ботов для автоматизации вашего бизнеса</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Контакты</h3>
+        <p class="text-gray-400">Email: info@botmaker.ru</p>
+        <p class="text-gray-400">Telegram: @bot_support</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Часы работы</h3>
+        <p class="text-gray-400">Пн-Пт: 9:00 - 18:00</p>
+        <p class="text-gray-400">Сб-Вс: выходной</p>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto pt-8 mt-8 border-t border-gray-700 text-center text-gray-400">
+      © <span id="current-year"></span> Все права защищены
+    </div>
   </footer>
 
-  <!-- Скрипт интеграции с Trello -->
   <script>
-    document.querySelector("#tg-form").addEventListener("submit", async function (e) {
+    // Установка текущего года в футере
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Обработка формы через FormSubmit
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      const formContainer = document.querySelector('.form-container');
+      formContainer.classList.add('success');
+      
+      // Если нужно AJAX-отправление, можно раскомментировать:
+      /*
       e.preventDefault();
-
-      const name = this.querySelector('input[placeholder="Ваше имя"]').value;
-      const contact = this.querySelector('input[placeholder="Телефон или Telegram"]').value;
-      const message = this.querySelector('textarea').value;
-
-      const cardName = `Заявка от ${name}`;
-      const cardDesc = `Контакт: ${contact}\nЗадача: ${message}`;
-
-      const key = 'fec9bd8ef05e610658deb21f93cf612e';
-      const token = '9ce92a0efccfcbf913405a625ae495a469907831dc5c90c3e27df95733f10c90';
-      const listId = '68737ca2e73d2aabf549d930';
-
-      const url = `https://api.trello.com/1/cards?key=${key}&token=${token}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDesc)}`;
-
-      try {
-        const response = await fetch(url, { method: 'POST' });
-
-        if (response.ok) {
-          alert("Заявка успешно отправлена в Trello!");
-          this.reset();
-        } else {
-          const errorText = await response.text();
-          alert("Ошибка при отправке в Trello: " + errorText);
+      const form = this;
+      const formData = new FormData(form);
+      
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
         }
-      } catch (error) {
-        alert("Ошибка сети или CORS: " + error.message);
-      }
+      })
+      .then(response => {
+        if (response.ok) {
+          formContainer.classList.add('success');
+          form.reset();
+        } else {
+          throw new Error('Ошибка отправки');
+        }
+      })
+      .catch(error => {
+        alert('Ошибка: ' + error.message);
+      });
+      */
     });
-  </script>
 
+    function resetForm() {
+      const formContainer = document.querySelector('.form-container');
+      const form = document.getElementById('contact-form');
+      
+      formContainer.classList.remove('success');
+      form.reset();
+    }
+  </script>
 </body>
 </html>
